@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --text: #333;
+            --accent: #888;
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Prevents scrolling between slides */
+        }
+
+        .slide {
+            display: none; /* Hidden by default */
+            text-align: center;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active { display: block; } /* Show only the active slide */
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Styling Inputs & Buttons */
+        input {
+            padding: 12px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        button:hover { background-color: #555; }
+
+        img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        p { margin-bottom: 20px; line-height: 1.5; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="slide active" id="slide-0">
+        <h1>🔒 Locked</h1>
+        <p>Enter the secret password (the most sus 4 digit combo) to enter.</p>
+        <input type="password" id="passwordInput" placeholder="What's our special date?">
+        <button onclick="checkPassword()">Unlock</button>
+        <p id="error" style="color: red; display: none; margin-top: 10px;">Incorrect! Try again.</p>
+    </div>
+
+    <div class="slide" id="slide-1">
+        <img src="photo1.jpg" alt="Memory 1">
+        <h2>Hey Niqqa!</h2>
+        <p>I know u don't love me, but i love u niqqa💋</p>
+        <button onclick="nextSlide(1)">Next →</button>
+    </div>
+
+    <div class="slide" id="slide-2">
+        <img src="photo2.jpg" alt="Memory 2">
+        <h2>The Journey</h2>
+        <p>From our first talk to every late-night bakchod chat, every second has been worth it.</p>
+        <button onclick="nextSlide(2)">Next →</button>
+    </div>
+
+    <div class="slide" id="slide-3">
+        <h1>🤓 Happy Today!</h1>
+        <p>May this year be as amazing as you are. I'm so proud of everything you do.</p>
+        <p><i>Love, Daddy Dev</i></p>
+        <button onclick="restart()">Start Over</button>
+    </div>
+
+    <script>
+        const secret = "6969"; // CHANGE THIS to your chosen password
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            if (input === secret) {
+                nextSlide(0);
+            } else {
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        function nextSlide(current) {
+            // Hide current slide
+            document.getElementById(`slide-${current}`).classList.remove('active');
+            // Show next slide
+            document.getElementById(`slide-${current + 1}`).classList.add('active');
+        }
+
+        function restart() {
+            location.reload(); // Re-locks the site
+        }
+    </script>
+
+</body>
+</html>
