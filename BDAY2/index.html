@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Surprise For You 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --soft-pink: #ffe4e1;
+            --bright-pink: #ffb6c1;
+            --dark-pink: #ff8fa3;
+            --text-gray: #4a4a4a;
+            --bg-cream: #fff9f9;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Floating Animation */
+        .heart {
+            position: absolute;
+            color: var(--bright-pink);
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: float 4s linear infinite;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .slide {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 1100px;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10;
+        }
+
+        .slide.active { display: block; }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        h1, h2 {
+            font-family: 'Gochi Hand', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-pink);
+        }
+
+        /* Password Box */
+        .password-box {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            border: 4px dashed var(--soft-pink);
+            box-shadow: 0 10px 20px rgba(255, 182, 193, 0.2);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        input {
+            padding: 12px;
+            width: 100%;
+            border: 2px solid var(--soft-pink);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        button {
+            font-family: 'Gochi Hand', cursive;
+            font-size: 1.6rem;
+            padding: 8px 30px;
+            background-color: var(--soft-pink);
+            color: var(--text-gray);
+            border: 3px solid var(--dark-pink);
+            cursor: pointer;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+
+        button:hover {
+            background-color: var(--dark-pink);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Enlarge Photo Layout */
+        .split-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .photo-side {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Standard Photo Styling */
+        .photo-side img.stand-alone {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: cover;
+            border: 12px solid white;
+            box-shadow: 10px 15px 30px rgba(0,0,0,0.1);
+            transform: rotate(-1.5deg);
+            border-radius: 4px;
+        }
+
+        /* --- Updated Collage Styling --- */
+        .collage-container {
+            position: relative;
+            width: 100%;
+            max-width: 550px; /* Wider to accommodate the spread */
+            height: 65vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .collage-container img {
+            position: absolute;
+            object-fit: cover;
+            border: 12px solid white; /* Thicker "Polaroid" border */
+            box-shadow: 5px 10px 25px rgba(0,0,0,0.15);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Center Main Photo */
+        .collage-container img.main {
+            width: 85%; /* Enlaged center image slightly */
+            height: 85%;
+            z-index: 2;
+            transform: rotate(0.5deg);
+        }
+
+        /* Overlapping Photo 1 (Left Bottom) */
+        .collage-container img.over-1 {
+            width: 35%; /* Shrunk significantly for visibility */
+            height: 35%;
+            bottom: -8%; /* Pushed outward */
+            left: -12%; /* Pushed outward */
+            z-index: 3;
+            transform: rotate(-8deg);
+        }
+
+        /* Overlapping Photo 2 (Right Bottom) */
+        .collage-container img.over-2 {
+            width: 35%; /* Shrunk significantly for visibility */
+            height: 35%;
+            bottom: -8%; /* Pushed outward */
+            right: -12%; /* Pushed outward */
+            z-index: 4;
+            transform: rotate(6deg);
+        }
+
+        /* Hover effect to highlight main photo and show it clearly */
+        .collage-container img.main:hover {
+            z-index: 10; /* Bring to very top on hover */
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 10px 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .text-side {
+            flex: 1;
+            padding: 20px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 850px) {
+            .split-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .photo-side { width: 100%; }
+            .collage-container {
+                height: 55vh;
+                max-width: 420px;
+                margin-bottom: 50px;
+            }
+            .collage-container img.over-1 { left: 0; bottom: -5%; }
+            .collage-container img.over-2 { right: 0; bottom: -5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="heart-container"></div>
+
+    <div class="slide active" id="slide-0">
+        <div class="password-box">
+            <h1>🌸 Hello!</h1>
+            <p>Enter the secret code to see your surprise.</p>
+            <input type="password" id="passwordInput" placeholder="Our special date?">
+            <button onclick="checkPassword()">Unlock ✨</button>
+            <p id="error" style="color: var(--dark-pink); display: none; margin-top: 15px;">Oops! Try again, cutie.</p>
+        </div>
+    </div>
+
+    <div class="slide" id="slide-1">
+        <div class="split-container">
+            <div class="photo-side">
+                <div class="collage-container">
+                    <img src="photo1.jpg" alt="Memory 1" class="main">
+                    <img src="photo2.jpg" alt="Memory 2" class="over-1">
+                    <img src="photo3.jpg" alt="Memory 3" class="over-2">
+                </div>
+            </div>
+            <div class="text-side">
+                <h2>Our Story...</h2>
+                <p>It's not just one memory; it's a collection of beautiful moments that I keep close to my heart. Every picture tells our story.</p>
+                <button onclick="nextSlide(1)">Next Page 💌</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide-2">
+        <div class="split-container">
+            <div class="photo-side">
+                <img src="photo2.jpg" alt="Memory 2" class="stand-alone">
+            </div>
+            <div class="text-side">
+                <h2>Thinking of you...</h2>
+                <p>I know the distance is tough, but seeing your smile makes it all worth it. I can't wait until we recreate this soon.</p>
+                <button onclick="nextSlide(2)">Click for a Wish ✨</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="slide-3">
+        <h1>✨ Happy Birthday! ✨</h1>
+        <p>You deserve all the pink cakes and happiness in the world. I hope your day is as amazing as you are. 💖</p>
+        <h2 style="font-size: 5rem;">🌸 🎂 🌸</h2>
+        <button onclick="restart()">See it again?</button>
+    </div>
+
+    <script>
+        const secret = "0808";
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            if (input === secret) {
+                nextSlide(0);
+            } else {
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+
+        function nextSlide(currentID) {
+            document.getElementById(`slide-${currentID}`).classList.remove('active');
+            document.getElementById(`slide-${currentID + 1}`).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function restart() { location.reload(); }
+
+        function createHeart() {
+            const container = document.getElementById('heart-container');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '🌸';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            container.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 600);
+
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkPassword();
+        });
+    </script>
+
+</body>
+</html>
